@@ -10,6 +10,32 @@ dotenv.config();
 app.use(cors(cors));
 app.use(express.json());
 
-let port = 3001;
+// typedef
+const typeDefs = gql`
+  type Query {
+    hello: String!
+  }
+`;
 
-app.listen(port, () => console.log(`Server running on port ${port}`));
+// resolver
+const resolvers = {
+  Query: {
+    hello: () => "hello word!",
+  },
+};
+
+// setting up graphql
+
+const apolloServer = new ApolloServer({
+  typeDefs,
+  resolvers,
+});
+
+apolloServer.applyMiddleware({ app, path: "/graphql" });
+
+let port = process.env.PORT || 3001;
+
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+  console.log(`GraphQl enpoint: ${apolloServer.graphqlPath}`);
+});
