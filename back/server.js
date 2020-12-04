@@ -4,6 +4,7 @@ const cors = require("cors");
 const app = express();
 const dotenv = require("dotenv");
 const { typeDefs } = require("./src/typeDefs");
+const { resolvers } = require("./src/resolvers");
 
 // set env variables
 
