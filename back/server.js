@@ -3,26 +3,13 @@ const { ApolloServer, gql } = require("apollo-server-express");
 const cors = require("cors");
 const app = express();
 const dotenv = require("dotenv");
+const { typeDefs } = require("./src/typeDefs");
 
 // set env variables
 
 dotenv.config();
 app.use(cors(cors));
 app.use(express.json());
-
-// typedef
-const typeDefs = gql`
-  type Query {
-    hello: String!
-  }
-`;
-
-// resolver
-const resolvers = {
-  Query: {
-    hello: () => "hello word!",
-  },
-};
 
 // setting up graphql
 
